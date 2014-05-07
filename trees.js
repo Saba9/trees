@@ -1,18 +1,5 @@
 var doAnimate = false;
-function drawCircle(x,y,width,color, canvas){
-  var context
-  if(canvas.jquery){
-    context = canvas[0].getContext("2d");
-  } else {
-    context = canvas.getContext("2d");
-  }
-  context.strokeStyle=color;
-  context.beginPath();
-  context.arc(x,y,width,0,2*Math.PI);
-  context.stroke();
-  context.strokeStyle="black"
-}
-function drawLine(x1,y1,x2,y2,canvas,width,color){
+function drawLine(x1,y1,x2,y2,canvas,width,randomize){
   // Handle JQuery Variables
   var context
   if(canvas.jquery){
@@ -20,16 +7,18 @@ function drawLine(x1,y1,x2,y2,canvas,width,color){
   } else {
     context = canvas.getContext("2d");
   }
+  if(randomize){
+    context.strokeStyle='#'+Math.floor(Math.random()*16777215).toString(16);
+  }
   context.beginPath();
   context.moveTo(x1,y1);
   context.lineTo(x2,y2);
   context.lineWidth = width == 'undefined' ? '5' : width
-  context.strokeStyle='#'+Math.floor(Math.random()*16777215).toString(16);
+  //context.strokeStyle=color;
   context.stroke();
   context.strokeStyle="black"
 }
 function drawChildren(parentX,parentY,length,ratio,angle,parentAngle,generation, width, canvas,random){
-  var random = random == "undefined" ? false : random;
   if(generation != 0){
     length *= ratio;
     width *= ratio;
@@ -40,11 +29,11 @@ function drawChildren(parentX,parentY,length,ratio,angle,parentAngle,generation,
     //angle = angle - Math.random() % Math.PI ;
     var x3 = parentX + Math.cos(parentAngle - angle) * length;
     var y3 = parentY + Math.sin(parentAngle - angle) * length;
-    drawLine(parentX,parentY,x2,y2,canvas,width)
-    drawLine(parentX,parentY,x3,y3,canvas,width)
+    drawLine(parentX,parentY,x2,y2,canvas,width,random)
+    drawLine(parentX,parentY,x3,y3,canvas,width,random)
     // Recurse!
-    drawChildren(x2, y2, length, ratio, angle, parentAngle + angle, generation - 1, width, canvas, true);
-    drawChildren(x3, y3, length, ratio, angle, parentAngle - angle, generation - 1, width, canvas, true);
+    drawChildren(x2, y2, length, ratio, angle, parentAngle + angle, generation - 1, width, canvas, random);
+    drawChildren(x3, y3, length, ratio, angle, parentAngle - angle, generation - 1, width, canvas, random);
   }
 }
 function increment(elem){
@@ -70,15 +59,14 @@ function updateTree(){
   var parentToChildRatio = Number($("#ratio").val());
   var generations = Number($("#generations").val())
   var angle = Number($("#angle").val()) * (Math.PI / 180);
-  //var random = $("random").val() == "Disable Random Colors";
+  var randomColors = $("#randomize").prop("checked");
   // Draw Root
-  drawLine(centerX,100,centerX,baseLength + 100,canvas,baseWidth);
-  drawChildren(centerX,baseLength + 100,baseLength,parentToChildRatio,angle,Math.PI / 2,generations, baseWidth, canvas);
+  drawLine(centerX,100,centerX,baseLength + 100,canvas,baseWidth,randomColors);
+  drawChildren(centerX,baseLength + 100,baseLength,parentToChildRatio,angle,Math.PI / 2,generations, baseWidth, canvas, randomColors);
 }
 $(document).ready(function(){
 $("#animate").click(function(){
   doAnimate = !doAnimate;
-  console.log(doAnimate);
   if(doAnimate){
     $("#animate").val("Stop Animation!");
   } else { 
