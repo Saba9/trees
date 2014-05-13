@@ -3,5 +3,30 @@ body {
   margin: 5px;
 }
 input { 
-  margin-right 25px;
+  margin-right: 25px;
+}
+div.sidebar{
+  float: left;
+  display: block;
+  border-right: 1px solid;
+  width: 11%;
+  min-width: 200px;
+  height: 100%;
+}
+.sidebar input{
+  display: block;
+  margin-bottom: 15px;
+}
+#tree{
+  float: right;
+  position: fixed;
+  left: 11%;
+}
+
+#randomize{
+  display: inline;
+}
+
+#inputForm{
+  margin-left: 5px;
 }

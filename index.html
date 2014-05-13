@@ -14,18 +14,23 @@
   <script src="trees.js"></script>
 </head>
 <body>
-  <form id="inputs">
-    Generations: <input id="generations" type="range" min="0" max="13" value="5"></input>
-    Angle: <input id="angle" type="text" value="30"></input>
-    Base Width: <input id="width" type="text" value="20"></input>
-    Base Length: <input id="length" type="text" value="185"></input>
-    Parent to Child Ratio: <input type="text" id="ratio" value=".73"></input>
-    Randomize Colors: <input type="checkbox" id="randomize"></input>
-    <input type="button" value="Animate!" id="animate"></input>
-  </form>
-  <br/>
-  <div id="tree" style="margin: 0 auto">
-    <canvas width="1000" height="1000" id="treeCanvas"></canvas>
+  <div id="content">
+    <div class="sidebar">
+      <div id="inputForm">
+        <form id="inputs">
+          Generations: <input id="generations" type="range" min="0" max="13" value="5"></input>
+          Angle: <input id="angle" type="text" value="30"></input>
+          Base Width: <input id="width" type="text" value="20"></input>
+          Base Length: <input id="length" type="text" value="185"></input>
+          Parent to Child Ratio: <input type="text" id="ratio" value=".73"></input>
+          Randomize Colors: <input type="checkbox" id="randomize"></input>
+          <input type="button" value="Animate!" id="animate"></input>
+        </form>
+      </div>
+    </div>
+    <div id="tree" style="margin: 0 auto">
+      <canvas id="treeCanvas"></canvas>
+    </div>
   </div>
 </body>
 </html>

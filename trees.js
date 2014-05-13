@@ -1,4 +1,14 @@
 var doAnimate = false;
+var sin = [];
+var cos = [];
+function cacheTrig(){
+  for(var i=0; i < Math.pi; i += (Math.pi / 180)){
+    sin.push(Math.sin(i));
+    cos.push(Math.cos(i));
+  }
+}
+cacheTrig();
+console.log(sin);
 function drawLine(x1,y1,x2,y2,canvas,width,randomize){
   // Handle JQuery Variables
   var context
@@ -22,11 +32,11 @@ function drawChildren(parentX,parentY,length,ratio,angle,parentAngle,generation,
   if(generation != 0){
     length *= ratio;
     width *= ratio;
-    //angle = angle - Math.random() % Math.PI ;
+    //angle = angle - Math.random() % Math.PI / 4;
     // Calculate endpoint of line segment diverging from base point at angle
     var x2 = parentX + Math.cos(parentAngle + angle) * length;
     var y2 = parentY + Math.sin(parentAngle + angle) * length;
-    //angle = angle - Math.random() % Math.PI ;
+    //angle = angle + Math.random() % Math.PI / 4 ;
     var x3 = parentX + Math.cos(parentAngle - angle) * length;
     var y3 = parentY + Math.sin(parentAngle - angle) * length;
     drawLine(parentX,parentY,x2,y2,canvas,width,random)
@@ -37,12 +47,26 @@ function drawChildren(parentX,parentY,length,ratio,angle,parentAngle,generation,
   }
 }
 function increment(elem){
-  elem.val(Number(elem.val()) + 1)
+  elem.val(Math.round(Number(elem.val())) + 1)
 }
+function decrement(elem){
+  elem.val(Math.round(Number(elem.val())) - 1)
+}
+var flag = false;
 function animate(){
   window.setInterval(function(){
     if (doAnimate){
-      increment($("#angle"));
+      angle = Number($("#angle").val());
+      if(angle == 180)
+        flag = true; 
+      else if (angle == 0){
+        flag = false;
+      }
+      if(!flag){
+        increment($("#angle"))
+      } else {
+        decrement($("#angle"))
+      }
       updateTree();
     }
   },1000/60)
@@ -78,8 +102,8 @@ $("#inputs").change(function(){
 })
   animate();
   canvas = $("#treeCanvas");
-  $("#tree").attr("width",$(window).width())
-  canvas.attr("width",$(window).width())
+  $("#tree").attr("width",$(window).width() * .89)
+  canvas.attr("width",$(window).width() *.89)
   canvas.attr("height",$(window).height())
   updateTree();
 });
