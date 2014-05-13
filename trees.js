@@ -1,14 +1,4 @@
 var doAnimate = false;
-var sin = [];
-var cos = [];
-function cacheTrig(){
-  for(var i=0; i < Math.pi; i += (Math.pi / 180)){
-    sin.push(Math.sin(i));
-    cos.push(Math.cos(i));
-  }
-}
-cacheTrig();
-console.log(sin);
 function drawLine(x1,y1,x2,y2,canvas,width,randomize){
   // Handle JQuery Variables
   var context
