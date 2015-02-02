@@ -11,21 +11,29 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="icon" href="favicon.ico" type="images/x-icon" />
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   <script src="trees.js"></script>
 </head>
 <body>
   <div id="content">
     <div class="sidebar">
       <div id="inputForm">
-        <form id="inputs">
-          Generations: <input id="generations" type="range" min="0" max="13" value="5"></input>
-          Angle: <input id="angle" type="text" value="30"></input>
+        <div id="inputs">
+          Generations: <input id="generations" type="range" min="0" max="14" value="10"></input>
+          <button id="decrementBtn" style="width: 30px; margin-right: 55px">-</button>
+          <button id="incrementBtn" style="width: 30px">+</button>
+          <br>
+          <br>
+          Angle: <input id="angle" type="text" value="25"></input>
           Base Width: <input id="width" type="text" value="20"></input>
-          Base Length: <input id="length" type="text" value="185"></input>
-          Parent to Child Ratio: <input type="text" id="ratio" value=".73"></input>
+          Base Length: <input id="length" type="text" value="170"></input>
+          Parent to Child Ratio: <input type="text" id="ratio" value=".74"></input>
+          Color One: <input type="text" id="colora" value="83,53,10"></input>
+          Color Two: <input type="text" id="colorb" value="0,255,0"></input>
+          Gradient Rate: <input type="text" id="gradrate" value=".83"></input>
           Randomize Colors: <input type="checkbox" id="randomize"></input>
           <input type="button" value="Animate!" id="animate"></input>
-        </form>
+        </div>
       </div>
     </div>
     <div id="tree" style="margin: 0 auto">
